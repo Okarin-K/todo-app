@@ -1,39 +1,39 @@
-import { Box, Button, Checkbox, Flex, Grid, GridItem, Input, Text } from '@chakra-ui/react';
-import { FormEvent, useState } from 'react';
+import { Box, Button, Checkbox, Flex, Input, Text } from '@chakra-ui/react';
+import { FormEvent, useEffect, useState } from 'react';
+import { addTodo, getTodoList } from '../api/todoRepository';
 import { Todo } from '../types/todo';
 
 export function TodoList() {
     const [title, setTitle] = useState('');
+    const [todoItems, setTodo] = useState<Todo[]>([]);
 
-  const [todoItems, setTodo] = useState<Todo[]>([]);
+    const onSubmit = async () => {
+        if(title == undefined || title === '') {
+            return;
+        }
 
-  const addTodo = (value: string) => {
-    const todo = [...todoItems];
-    
-    todo.push({
-      title: value,
-      completed: false
-    });
+        addTodo(title).then(() => {
+            setTitle('');
+        }).catch((err) => {
+            console.error(err);
+        })
+    }
 
-    setTodo(todo);
-    setTitle('');
-  }
+    useEffect(() => {
+            const subscribe = async () => getTodoList().then(todoList => {
+                if(todoList == undefined) {
+                    return;
+                }
 
-  const updateTodo = (index: number) => {
-    const todoList = todoItems;
-    todoList[index].completed = !todoList[index].completed
-    
-    setTodo(todoList);
-  }
+                setTodo(todoList as Todo[]);
+            });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    addTodo(title);
-  }
+            return () => { subscribe() }
+    }, []);
   
     return <div>
         <Text fontSize='6xl' fontFamily='sans-serif'>Todo List</Text>
-            <form onSubmit={handleSubmit}>
+            <form onClick={async () => onSubmit()}>
                 <Input m={2} w={300} type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Please input TODO...' />
                 <Button
                     px='3'
@@ -42,13 +42,14 @@ export function TodoList() {
                     rounded='md'
                     _hover={{ bg: 'green.300' }}
                     type="submit"
+
                 >
                     TODOを追加
                 </Button>
             </form>
             <Flex justifyContent='center' flexFlow='column'>
                 {todoItems.map((todo, index) => {
-                    return <Box><Checkbox textAlign='left' w='300px' m='2' onClick={() => updateTodo(index)}>{todo.title}</Checkbox></Box>
+                    return <Box key={index}><Checkbox textAlign='left' w='300px' m='2'>{todo.title}</Checkbox></Box>
                 })}
             </Flex>
     </div>
