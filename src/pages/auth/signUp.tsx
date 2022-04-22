@@ -13,16 +13,14 @@ import { useState } from "react";
 import { useSignup } from "../../api/signup";
 
 const SignUp = () => {
+  const { signup } = useSignup();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { signup } = useSignup();
-
   const handleShowClick = () => setShowPassword(!showPassword);
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    // Prevent page reload
     event.preventDefault();
 
     signup(email, password);

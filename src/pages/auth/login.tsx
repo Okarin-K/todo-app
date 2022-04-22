@@ -20,12 +20,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { login, success, error } = useLogin();
+  const { login } = useLogin();
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    // Prevent page reload
     event.preventDefault();
 
     login(email, password);
