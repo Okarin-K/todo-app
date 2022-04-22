@@ -8,12 +8,11 @@ export const useLogin = () => {
   const login = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setTimeout(() => {
-          navigate("/todos");
-        }, 1000);
+        navigate("/todos");
       })
       .catch((err) => {
         console.log(err.message);
+        alert("ログインできません");
       });
   };
 

@@ -8,9 +8,7 @@ export const useLogout = () => {
   const logout = () => {
     signOut(auth)
       .then(() => {
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.message);

@@ -93,7 +93,7 @@ const Login = () => {
         </Box>
       </Stack>
       <Box>
-        初めてですか?{" "}
+        登録はこちら{" "}
         <Link color="teal.500" href="/signUp">
           Sign Up
         </Link>

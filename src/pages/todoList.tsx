@@ -10,18 +10,20 @@ import {
   ListItem,
   Stack,
 } from "@chakra-ui/react";
-import { onAuthStateChanged, User } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useLogout } from "../api/logout";
 import { addTodo, getTodoList } from "../api/todoRepository";
-import { auth } from "../services/initializeFirebase";
 import { Todo } from "../types/todo";
+import { useAuth } from "./auth/authProvider";
 
 export function TodoList() {
+  const { logout } = useLogout();
+
   const [title, setTitle] = useState("");
   const [todoItems, setTodo] = useState<Todo[]>([]);
 
-  const { logout } = useLogout();
+  const authContext = useAuth();
 
   const onSubmit = async () => {
     if (title == undefined || title === "") {
@@ -52,51 +54,59 @@ export function TodoList() {
     subscribe();
   }, []);
 
-  return (
+  return authContext.user ? (
     <Box>
-      <Flex direction={"row-reverse"}>
+      <Button
+        type="submit"
+        variant="solid"
+        colorScheme="teal"
+        width="full"
+        onClick={logout}
+      >
+        Logout
+      </Button>
+      <Flex
+        flexDirection="column"
+        width="100wh"
+        height="100vh"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Stack>
-          <Button
-            borderRadius={0}
-            type="submit"
-            variant="solid"
-            colorScheme="teal"
-            onClick={logout}
-          >
-            Logout
-          </Button>
+          <Heading color="teal.400">Todo List</Heading>
+          <FormControl onClick={async () => onSubmit()}>
+            <Input
+              m={2}
+              w={300}
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Please input TODO..."
+            />
+            <Button
+              type="submit"
+              variant="solid"
+              colorScheme="teal"
+              _hover={{ bg: "green.300" }}
+            >
+              TODOを追加
+            </Button>
+          </FormControl>
+          <List>
+            {todoItems.map((todo, index) => {
+              return (
+                <ListItem key={index}>
+                  <Checkbox textAlign="left" w="300px" m="2">
+                    {todo.title}
+                  </Checkbox>
+                </ListItem>
+              );
+            })}
+          </List>
         </Stack>
       </Flex>
-      <Heading color="teal.400">Todo List</Heading>
-      <FormControl onClick={async () => onSubmit()}>
-        <Input
-          m={2}
-          w={300}
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Please input TODO..."
-        />
-        <Button
-          type="submit"
-          variant="solid"
-          colorScheme="teal"
-          _hover={{ bg: "green.300" }}
-        >
-          TODOを追加
-        </Button>
-      </FormControl>
-      <List>
-        {todoItems.map((todo, index) => {
-          return (
-            <ListItem key={index}>
-              <Checkbox textAlign="left" w="300px" m="2">
-                {todo.title}
-              </Checkbox>
-            </ListItem>
-          );
-        })}
-      </List>
     </Box>
+  ) : (
+    <Navigate to="/" />
   );
 }

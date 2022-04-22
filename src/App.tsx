@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { AuthProvider } from "./pages/auth/authProvider";
 import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/signUp";
 import { TodoList } from "./pages/todoList";
 
 function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route index element={<Login />} />
@@ -15,11 +16,8 @@ function App() {
           <Route path="/todos" element={<TodoList />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </AuthProvider>
   );
 }
 
 export default App;
-function setUser(currentUser: import("@firebase/auth").User | null) {
-  throw new Error("Function not implemented.");
-}

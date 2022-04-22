@@ -8,9 +8,7 @@ export const useSignup = () => {
   const signup = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.message);
