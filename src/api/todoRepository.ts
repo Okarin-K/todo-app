@@ -7,7 +7,7 @@ import {
   query,
   Timestamp,
 } from "firebase/firestore/lite";
-import { firestoreDB } from "../services/initializeFirebase";
+import { db } from "../services/initializeFirebase";
 
 export const addTodo = async (title: string) => {
   const docData = {
@@ -16,12 +16,12 @@ export const addTodo = async (title: string) => {
     time: Timestamp.fromDate(new Date()),
   };
 
-  await addDoc(collection(firestoreDB, "todo"), docData);
+  await addDoc(collection(db, "todo"), docData);
 };
 
 export const getTodoList = async () => {
   const snapshot = await getDocs(
-    query(collection(firestoreDB, "todo"), orderBy("time"))
+    query(collection(db, "todo"), orderBy("time"))
   );
 
   const todoList: DocumentData[] = [];
