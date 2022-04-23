@@ -1,0 +1,27 @@
+{
+    "name": "backend-todo-app",
+    "version": "1.0.0",
+    "description": "TODOアプリのAPIサーバー",
+    "main": "index.js",
+    "scripts": {
+        "build": "npx tsc --build",
+        "watch": "npx tsc --watch",
+        "start": "node ./dist/index.js"
+    },
+    "author": "Okarin-K",
+    "license": "ISC",
+    "dependencies": {
+        "@google-cloud/firestore": "^5.0.2",
+        "@types/cors": "^2.8.12",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "firebase": "^9.6.11"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "@types/node": "^17.0.25",
+        "prettier": "2.6.2",
+        "typescript": "^4.6.3"
+    }
+}
