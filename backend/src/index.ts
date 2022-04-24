@@ -1,10 +1,16 @@
-import express from 'express';
-import dotenv from 'dotenv';
 import { Firestore } from '@google-cloud/firestore';
 import cors from 'cors';
-import path from 'path';
+import dotenv from 'dotenv';
+import express from 'express';
+import { cert, initializeApp } from 'firebase-admin/app';
+import { verifyIdToken } from './auth/verifyIdToken';
 
 dotenv.config();
+
+const serviceAccount = require('../serviceAccountKey.json');
+initializeApp({
+    credential: cert(serviceAccount),
+});
 
 const db = new Firestore({
     projectId: 'proven-citizen-348106',
@@ -21,6 +27,8 @@ const options: cors.CorsOptions = {
 
 app.use(cors(options));
 app.use(express.json());
+
+app.use(verifyIdToken);
 
 app.get('/ping', async (req, res) => {
     res.send('Hello');
