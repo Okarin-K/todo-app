@@ -3,11 +3,12 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import { cert, initializeApp } from 'firebase-admin/app';
+import path from 'path';
 import { verifyIdToken } from './auth/verifyIdToken';
 
 dotenv.config();
 
-const serviceAccount = require('../serviceAccountKey.json');
+const serviceAccount = path.join(process.cwd(), 'serviceAccountKey.json');
 initializeApp({
     credential: cert(serviceAccount),
 });
