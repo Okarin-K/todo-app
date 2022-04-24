@@ -13,8 +13,8 @@ initializeApp({
 });
 
 const db = new Firestore({
-    projectId: 'proven-citizen-348106',
-    keyFilename: process.env['GOOGLE_APPLICATION_CREDENTIALS'],
+    projectId: 'todo-app-ca00b',
+    keyFilename: process.env['FIRE_BASE_CREDENTIALS'],
 });
 
 const app = express();
