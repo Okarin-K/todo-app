@@ -19,7 +19,7 @@ const db = new Firestore({
 });
 
 const app = express();
-const port = 5000;
+const port = process.env['PORT'];
 
 const allowedOrigins = ['http://localhost:3000'];
 const options: cors.CorsOptions = {
