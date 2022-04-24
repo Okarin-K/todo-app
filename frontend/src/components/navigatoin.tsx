@@ -1,10 +1,10 @@
-import { VStack, Text, Spacer, Box, HStack, Stack } from '@chakra-ui/react';
-import { useAuth } from '../pages/auth/authProvider';
+import { Box, HStack, Spacer } from '@chakra-ui/react';
+import { UseAuth } from '../pages/auth/authProvider';
 import { Logout } from './buttons/logout';
 import { ThemeToggler } from './themeToggler';
 
 export function Navigation() {
-    const authContext = useAuth();
+    const authContext = UseAuth();
 
     return (
         <HStack>

@@ -4,32 +4,43 @@ import { Navigate } from 'react-router-dom';
 import { addTodo } from '../api/dataAccess/addTodo';
 import { getTodoList } from '../api/dataAccess/getTodoList';
 import { Todo } from '../types/todo';
-import { useAuth } from './auth/authProvider';
+import { UseAuth } from './auth/authProvider';
 
 export function TodoList() {
     const [title, setTitle] = useState('');
     const [todoItems, setTodo] = useState<Todo[]>([]);
 
-    const authContext = useAuth();
+    const authContext = UseAuth();
 
     const onSubmit = async () => {
         if (title == undefined || title === '') {
             return;
         }
 
-        addTodo(title)
+        if (authContext.user == undefined) {
+            return;
+        }
+
+        const idToken = await authContext.user.getIdToken();
+
+        addTodo(idToken, title)
             .then(() => setTitle(''))
             .catch((err) => console.log(err));
     };
 
     useEffect(() => {
-        const subscribe = () => {
-            getTodoList().then((data) => {
-                setTodo(data);
-            });
+        const subscribe = async () => {
+            if (authContext.user == undefined) {
+                return;
+            }
+
+            const idToken = await authContext.user.getIdToken();
+            const todoList = await getTodoList(idToken);
+
+            setTodo(todoList);
         };
 
-        return () => subscribe();
+        subscribe();
     }, []);
 
     return authContext.user ? (

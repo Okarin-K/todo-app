@@ -1,7 +1,7 @@
 import { Timestamp } from 'firebase/firestore/lite';
 import { Todo } from '../../types/todo';
 
-export async function addTodo(title: string): Promise<void> {
+export async function addTodo(idToken: string, title: string): Promise<void> {
     const todo: Todo = {
         title,
         completed: false,
@@ -14,6 +14,7 @@ export async function addTodo(title: string): Promise<void> {
         cache: 'no-cache',
         headers: {
             'Content-Type': 'application/json',
+            'X-FBUser-Token': idToken,
         },
         referrerPolicy: 'no-referrer',
         body: JSON.stringify(todo),
