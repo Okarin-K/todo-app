@@ -1,8 +1,7 @@
 import { Box, Button, FormControl, Heading, Input, InputGroup, InputRightElement, Stack, VStack } from "@chakra-ui/react";
 import Router from "next/router";
 import { useState } from "react";
-import { createUser } from "./api/createUser";
-import { signIn } from "./api/signin";
+import { signIn } from "./api/signIn";
 
 const Signin = () => {
     const [email, setEmail] = useState("");

@@ -1,5 +1,4 @@
 import { getAuth, User } from "firebase/auth";
-import { useLoginState } from "../../../hooks/useLoginState";
 
 export async function getTodoList(user: User) {
     const idToken = await user.getIdToken(true);

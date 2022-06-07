@@ -2,7 +2,6 @@ import { VStack, Heading, HStack, Input, Button, List, ListItem, Checkbox, Spinn
 import { useEffect, useState } from "react";
 import { Timestamp } from "firebase/firestore/lite";
 import { addTodo } from "./api/todo/addTodo";
-import { LoginState, useLoginState } from "../hooks/useLoginState";
 import { signOut } from "./api/signOut";
 import Router from "next/router";
 import { getTodoList } from "./api/todo/getTodoList";
