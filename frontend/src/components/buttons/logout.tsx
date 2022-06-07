@@ -7,7 +7,13 @@ export function Logout() {
     return (
         <HStack spacing={1}>
             <Spacer />
-            <Button borderRadius={0} type="submit" variant="solid" colorScheme="teal" onClick={logout}>
+            <Button
+                borderRadius={0}
+                type="submit"
+                variant="solid"
+                colorScheme="teal"
+                onClick={logout}
+            >
                 Logout
             </Button>
         </HStack>

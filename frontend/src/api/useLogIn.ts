@@ -11,7 +11,7 @@ export const useLogin = () => {
                 navigate('/todos');
             })
             .catch((err) => {
-                console.log(err.message);
+                console.log(err);
                 alert('ログインできません');
             });
     };

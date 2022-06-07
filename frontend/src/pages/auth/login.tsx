@@ -21,10 +21,24 @@ const Login = () => {
             <Heading color="teal.400">Login</Heading>
             <Box minW={{ base: '90%', md: '468px' }}>
                 <form onSubmit={handleSubmit}>
-                    <VStack spacing={4} p="1rem" backgroundColor="whiteAlpha.900" boxShadow="md">
+                    <VStack
+                        spacing={4}
+                        p="1rem"
+                        backgroundColor="whiteAlpha.900"
+                        boxShadow="md"
+                    >
                         <Email onChange={(e) => setEmail(e.target.value)} />
-                        <Password onChange={(e) => setPassword(e.target.value)} />
-                        <Button borderRadius={0} type="submit" variant="solid" colorScheme="teal" width="full" onClick={() => login}>
+                        <Password
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <Button
+                            borderRadius={0}
+                            type="submit"
+                            variant="solid"
+                            colorScheme="teal"
+                            width="full"
+                            onClick={() => login}
+                        >
                             Login
                         </Button>
                     </VStack>

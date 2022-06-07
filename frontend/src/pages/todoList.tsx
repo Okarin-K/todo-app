@@ -1,4 +1,13 @@
-import { Button, Checkbox, Heading, HStack, Input, List, ListItem, VStack } from '@chakra-ui/react';
+import {
+    Button,
+    Checkbox,
+    Heading,
+    HStack,
+    Input,
+    List,
+    ListItem,
+    VStack,
+} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { addTodo } from '../api/dataAccess/addTodo';
@@ -56,7 +65,12 @@ export function TodoList() {
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Please input TODO..."
                     />
-                    <Button type="submit" variant="solid" colorScheme="teal" _hover={{ bg: 'green.300' }}>
+                    <Button
+                        type="submit"
+                        variant="solid"
+                        colorScheme="teal"
+                        _hover={{ bg: 'green.300' }}
+                    >
                         ADD
                     </Button>
                 </HStack>

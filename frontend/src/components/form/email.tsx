@@ -1,7 +1,11 @@
-import { FormControl, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/react';
+import { FormControl, Input } from '@chakra-ui/react';
 import { ChangeEventHandler, useState } from 'react';
 
-export function Email({ onChange }: { onChange: ChangeEventHandler<HTMLInputElement> }) {
+export function Email({
+    onChange,
+}: {
+    onChange: ChangeEventHandler<HTMLInputElement>;
+}) {
     const [emailError, setEmailError] = useState<boolean>(false);
 
     return (

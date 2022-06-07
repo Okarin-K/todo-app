@@ -4,15 +4,16 @@ import {
     Input,
     InputRightElement,
     Button,
-    color,
     Text,
     useColorModeValue,
-    FormErrorMessage,
-    FormHelperText,
 } from '@chakra-ui/react';
 import { ChangeEventHandler, useState } from 'react';
 
-export function Password({ onChange }: { onChange: ChangeEventHandler<HTMLInputElement> }) {
+export function Password({
+    onChange,
+}: {
+    onChange: ChangeEventHandler<HTMLInputElement>;
+}) {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
@@ -35,7 +36,11 @@ export function Password({ onChange }: { onChange: ChangeEventHandler<HTMLInputE
                 />
                 <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                        {showPassword ? <Text color={color}>Hide</Text> : <Text color={color}>Show</Text>}
+                        {showPassword ? (
+                            <Text color={color}>Hide</Text>
+                        ) : (
+                            <Text color={color}>Show</Text>
+                        )}
                     </Button>
                 </InputRightElement>
             </InputGroup>
