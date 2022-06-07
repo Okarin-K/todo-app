@@ -11,7 +11,7 @@ export async function addTodo(user: User, title: string): Promise<void> {
         created_at: Timestamp.fromDate(new Date()),
     };
 
-    fetch("http://localhost:5000/todos", {
+    fetch("https://backend-ow6hxhcvfa-uc.a.run.app/todos", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
