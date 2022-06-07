@@ -20,7 +20,7 @@
         "react": "^18.0.0",
         "react-dom": "^18.0.0",
         "react-router-dom": "^6.3.0",
-        "react-scripts": "^5.0.1",
+        "react-scripts": "^2.1.3",
         "typescript": "^4.6.3",
         "web-vitals": "^2.1.4"
     },
@@ -51,6 +51,10 @@
     },
     "devDependencies": {
         "@types/firebase": "^3.2.1",
+        "@typescript-eslint/eslint-plugin": "^5.27.1",
+        "@typescript-eslint/parser": "^5.27.1",
+        "eslint": "^8.17.0",
+        "eslint-plugin-react": "^7.30.0",
         "prettier": "^2.6.2"
     }
 }
